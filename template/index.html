@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="xMenu">
+    <head>
+        <meta charset="utf-8">
+        <title>xMenu Frontend</title>
+        <meta name="version" content="1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body ng-controller="xController" ng-navigate resize>
+        <div id="loader"></div>
+        <video id="video-intro"></video>
+        <div class="container-fluid">
+            <div id="header">
+                <img class="center-block" ng-src="img/{{menus[menuIndex].name}}.png" err-img="img/no-header.png"/>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div id="games-list" class="center-block" ng-style="{'border-color': game.index==listIndex ? menus[menuIndex].color : '', color: game.index==listIndex ? menus[menuIndex].color : ''}">
+                        <ul>
+                            <li ng-repeat="game in games" 
+                                ng-class="{highlight: game.index==listIndex}" 
+                                ng-style="{'background-color': game.index==listIndex ? menus[menuIndex].color : ''}" 
+                                ng-click="startGame($event)" 
+                                data-index="{{game.index}}">
+                                {{game.displayName}}
+                                <span ng-class="{hidden: itemList=='filteredItems', 'glyphicon-ok': !game.filtered, 'glyphicon-remove': game.filtered}" class="xfilter glyphicon pull-right"></span>
+                                <span class="originalname" ng-class="{hidden: itemList=='filteredItems'}">{{game.description}} ({{game.year}})</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div id="game-detail" class="center-block" ng-style="{'border-color': game.index==listIndex ? menus[menuIndex].color : '', color: game.index==listIndex ? menus[menuIndex].color : ''}">
+                        <img class="snap" ng-src="{{game.snap}}" err-img="img/no-snap.png" />
+                        <video id="game-video" ng-src="{{trustSrc(game.video)}}" loop err-vid=""></video>
+                    </div>
+                </div>
+            </div>
+            <div id="footer" class="row">
+                <div class="col-xs-12 icon-container">
+                      <span class="xicon glyphicon pull-right" ng-class="{'glyphicon-volume-up': media.musicMuted, 'glyphicon-volume-off': !media.musicMuted}" ng-click="iconClick('mute')" ng-attr-title="{{ media.musicMuted ? 'Turn On Background Audio' : 'Turn Off Background Audio'}}"></span>
+                </div>
+            </div>
+        </div>
+        <script src="js/vendor/jquery-2.1.0.min.js"></script>
+        <script src="js/vendor/angular.min.js"></script>
+        <script src="js/vendor/howler.min.js"></script>
+        <script src="js/settings.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
