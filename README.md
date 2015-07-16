@@ -28,7 +28,7 @@ Additional Info:
 * The supplied template has capabilities to edit the displayed game names.
 * It's possible this could be setup so resources (snaps/videos) are retrieved from a web server.
 
-
+This plugin uses components from Simple-get chrome extension - http://code.google.com/p/simple-get/
 
  
 
